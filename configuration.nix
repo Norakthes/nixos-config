@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./modules/kanata.nix
+      ./modules/scripts.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -73,16 +74,19 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim
+    neovim
     wget
     git
+    zig
 
     dmenu
     st
     j4-dmenu-desktop
     firefox
     xorg.xev
-    redshift
     brightnessctl
+    dunst
+    libnotify
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -141,5 +145,37 @@
       naturalScrolling = true;
       tapping = false;
     };
+  };
+
+  services.redshift = {
+    enable = true;
+    package = pkgs.gammastep;
+  };
+
+  location = {
+    provider = "manual";
+    latitude = 55.68;
+    longitude = 12.57;
+  };
+
+  programs.neovim = {
+    enable = true;
+  };
+
+  services.flatpak.enable = true;
+  systemd.services.flatpak-repo = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      # Add xdg-desktop-portal-gnome if using GNOME
+      # Add xdg-desktop-portal-kde if using KDE
+    ];
   };
 }

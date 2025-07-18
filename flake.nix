@@ -11,7 +11,10 @@
       hostname = "laptop";
       username = "rasmus";
       features = {};
-      keyboard = "/dev/input/by-id/usb-ASUSTeK_Computer_Inc._N-KEY_Device-if02-event-kbd";
+      keyboard = [
+        "/dev/input/by-id/usb-ASUSTeK_Computer_Inc._N-KEY_Device-if02-event-kbd"
+        "/dev/input/by-id/usb-ASUSTeK_Computer_Inc._N-KEY_Device-event-if00"
+      ];
     };
   in {
     nixosConfigurations.${global_config.hostname} = nixpkgs.lib.nixosSystem {
