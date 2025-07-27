@@ -14,6 +14,7 @@ in
       ./modules/scripts.nix
       ./modules/dwm.nix
       ./modules/zsh.nix
+      ./modules/lightdm.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

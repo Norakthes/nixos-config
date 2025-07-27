@@ -34,7 +34,9 @@
         features = [
           "gaming"
         ];
-        keyboard = [];
+        keyboard = [
+          "/dev/input/by-id/usb-ROYUAN_Akko_Multi-modes_Keyboard-B-event-kbd"
+	];
         gpu = {
           type = "amd";
         };
