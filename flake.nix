@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    dwm.url = "path:/etc/flakes/dwm";
+    dwm.url = "github:norakthes/dwm-flake";
   };
 
   outputs = { self, nixpkgs, nixos-hardware, dwm }:
