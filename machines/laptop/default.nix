@@ -12,7 +12,7 @@
     autoScrub = {
       enable = true;
       interval = "monthly";
-      filesystems = [ "/" ];
+      fileSystems = [ "/" ];
     };
   };
 
