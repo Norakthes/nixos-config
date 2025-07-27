@@ -2,14 +2,18 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, global_config, ... }:
+{ config, pkgs, global_config, machine_name, ... }:
 
+let
+  hasFeature = feature: builtins.elem feature global_config.features;
+in
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
       ./modules/kanata.nix
       ./modules/scripts.nix
+      ./modules/dwm.nix
+      ./modules/zsh.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -79,6 +83,8 @@
     git
     zig
 
+    ffmpeg-full
+    ffmpegthumbnailer
     dmenu
     st
     j4-dmenu-desktop
@@ -87,7 +93,20 @@
     brightnessctl
     dunst
     libnotify
+    flameshot
+    transmission_4-gtk
+
+    xfce.thunar-archive-plugin
+    xfce.thunar-volman
   ];
+
+  programs.thunar.enable = true;
+
+  programs.xfconf.enable = true;
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
+
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -100,13 +119,13 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -118,12 +137,7 @@
 
 
   # Bootstrap environment shit, because I don't want to configure all my shit from no gui env
-  services.xserver = {
-    enable = true;
-    windowManager.dwm.enable = true;
-  };
 
-  services.displayManager.defaultSession = "none+dwm";
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -178,4 +192,19 @@
       # Add xdg-desktop-portal-kde if using KDE
     ];
   };
+
+  services.picom.enable = true;
+
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+  ];
+
+
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
+  services.blueman.enable = true;
 }

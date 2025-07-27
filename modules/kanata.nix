@@ -33,12 +33,10 @@
            config = ''
 	      (defsrc
 	         caps esc lctl lmet
-                 volu vold
 	      )
 
 	      (deflayer base
 	         esc caps lctl lctl
-                 (cmd ${scripts.changevolscript}/bin/changevol "+5%") (cmd ${scripts.changevolscript}/bin/changevol "+5%")
 	      )
 	   '';
 	};
