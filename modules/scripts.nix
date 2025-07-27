@@ -11,7 +11,7 @@ let
   };
 
   changebrightnessscript = pkgs.writeShellApplication {
-    name = "changbrightness";
+    name = "changebrightness";
     runtimeInputs = with pkgs; [ 
       brightnessctl
       libnotify 
