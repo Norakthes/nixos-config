@@ -6,13 +6,16 @@
       },
       "locked": {
         "lastModified": 1753148755,
-        "narHash": "sha256-gefhgCvjl5mONuoxIy/aH0m5gMY3tlQBUj/a2+9ANn4=",
-        "path": "/etc/flakes/dwm",
-        "type": "path"
+        "narHash": "sha256-hjttBOWWNriQoRrH4dvCIp+HZKCSmVBHnNfLJvlgv1g=",
+        "owner": "norakthes",
+        "repo": "dwm-flake",
+        "rev": "4f586470d7e5fff5c39fca5bc846dda75afca675",
+        "type": "github"
       },
       "original": {
-        "path": "/etc/flakes/dwm",
-        "type": "path"
+        "owner": "norakthes",
+        "repo": "dwm-flake",
+        "type": "github"
       }
     },
     "nixos-hardware": {
