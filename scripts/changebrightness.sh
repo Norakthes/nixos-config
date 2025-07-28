@@ -2,7 +2,8 @@
 set -euo pipefail
 
 # Change brightness and get the new values in one command
-mapfile -t brightness_data < <(brightnessctl -m "$@" | tr "," " ")
+#mapfile -t brightness_data < <(brightnessctl -m "$@" | tr "," " ")
+read -ra brightness_data <<< "$(brightnessctl -m "$@" | tr "," " ")"
 brightness_percentage=${brightness_data[3]/"%"/""}
 brightness_value=${brightness_data[2]}
 
