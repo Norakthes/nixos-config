@@ -5,11 +5,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1753148755,
-        "narHash": "sha256-hjttBOWWNriQoRrH4dvCIp+HZKCSmVBHnNfLJvlgv1g=",
+        "lastModified": 1753661846,
+        "narHash": "sha256-ng17OdYpN+gaL8RG+20SS900HlTsN+yMWYsoNZ9BOEc=",
         "owner": "norakthes",
         "repo": "dwm-flake",
-        "rev": "4f586470d7e5fff5c39fca5bc846dda75afca675",
+        "rev": "2fc15b6e574c297ef3c530793c31fc7f5e8845b5",
         "type": "github"
       },
       "original": {
