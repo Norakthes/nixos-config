@@ -94,6 +94,8 @@
     # Terminal utilities
     htop
     btop
+
+    zsh-completions
   ];
 
   # Set user's default shell to zsh
