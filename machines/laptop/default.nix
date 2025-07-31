@@ -32,4 +32,12 @@
     btrfs-compress-check = "sudo compsize /";
     btrfs-defrag = "sudo btrfs filesystem defragment -r -v -czstd /";
   };
+
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
+    nvidiaSettings = true;
+  };
 }
