@@ -35,11 +35,10 @@
     
     # Additional Zsh configuration
     shellAliases = {
-      ls = "eza --icons";
-      ll = "eza --icons -l";
-      la = "eza --icons -la";
-      l = "eza --icons -CF";
-
+      ls = "eza --icons=auto";
+      ll = "eza --icons=auto -l";
+      la = "eza --icons=auto -la";
+      
       tree = "eza --icons --tree";
 
       grep = "rg --color=auto";
