@@ -51,6 +51,7 @@
       nix-dry = "sudo nixos-rebuild dry-run --flake \"/etc/nixos/.#${global_config.hostname}\"";
       nix-boot = "sudo nixos-rebuild boot --flake \"/etc/nixos/.#${global_config.hostname}\"";
       nix-test = "sudo nixos-rebuild test --flake \"/etc/nixos/.#${global_config.hostname}\"";
+      nix-clean = "sudo nix-collect-garbage --delete-older-than 4d";
     };
     
     # Smart nixos-rebuild function (overrides the original command)

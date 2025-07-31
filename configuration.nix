@@ -10,6 +10,7 @@ in
 {
   imports =
     [ # Include the results of the hardware scan.
+      ./modules/gc.nix
       ./modules/kanata.nix
       ./modules/scripts.nix
       ./modules/dwm.nix
