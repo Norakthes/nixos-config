@@ -48,17 +48,17 @@
       find = "fd";
       
       # NixOS rebuild shortcuts
-      nix-switch = "sudo nixos-rebuild switch --flake /etc/nixos/.#${global_config.hostname}";
-      nix-dry = "sudo nixos-rebuild dry-run --flake /etc/nixos/.#${global_config.hostname}";
-      nix-boot = "sudo nixos-rebuild boot --flake /etc/nixos/.#${global_config.hostname}";
-      nix-test = "sudo nixos-rebuild test --flake /etc/nixos/.#${global_config.hostname}";
+      nix-switch = "sudo nixos-rebuild switch --flake \"/etc/nixos/.#${global_config.hostname}\"";
+      nix-dry = "sudo nixos-rebuild dry-run --flake \"/etc/nixos/.#${global_config.hostname}\"";
+      nix-boot = "sudo nixos-rebuild boot --flake \"/etc/nixos/.#${global_config.hostname}\"";
+      nix-test = "sudo nixos-rebuild test --flake \"/etc/nixos/.#${global_config.hostname}\"";
     };
     
     # Smart nixos-rebuild function (overrides the original command)
     shellInit = ''
       nixos-rebuild() {
         local action="''${1:-switch}"
-        sudo nixos-rebuild "$action" --flake /etc/nixos/.#${global_config.hostname} "''${@:2}"
+        sudo nixos-rebuild "$action" --flake \"/etc/nixos/.#${global_config.hostname}\" "''${@:2}"
       }
     ''; 
 
