@@ -35,14 +35,19 @@
     
     # Additional Zsh configuration
     shellAliases = {
-      ll = "ls -l";
-      la = "ls -la";
-      l = "ls -CF";
-      ".." = "cd ..";
-      "..." = "cd ../..";
-      grep = "grep --color=auto";
+      ls = "eza --icons";
+      ll = "eza --icons -l";
+      la = "eza --icons -la";
+      l = "eza --icons -CF";
 
-         # NixOS rebuild shortcuts
+      tree = "eza --icons --tree";
+
+      grep = "rg --color=auto";
+      cat = "bat";
+      top = "btop";
+      find = "fd";
+      
+      # NixOS rebuild shortcuts
       nix-switch = "sudo nixos-rebuild switch --flake /etc/nixos/.#${global_config.hostname}";
       nix-dry = "sudo nixos-rebuild dry-run --flake /etc/nixos/.#${global_config.hostname}";
       nix-boot = "sudo nixos-rebuild boot --flake /etc/nixos/.#${global_config.hostname}";
@@ -88,7 +93,6 @@
     nodejs
     
     # Terminal utilities
-    tree
     htop
     btop
   ];
