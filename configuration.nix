@@ -15,6 +15,7 @@ in
       ./modules/dwm.nix
       ./modules/zsh.nix
       ./modules/lightdm.nix
+      ./modules/wallpaper.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -96,6 +97,7 @@ in
     libnotify
     flameshot
     transmission_4-gtk
+    feh
 
     xfce.thunar-archive-plugin
     xfce.thunar-volman
