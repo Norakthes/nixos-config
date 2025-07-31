@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, global_config, machine_name, ... }:
+{ config, pkgs, global_config, machine_name, st, ... }:
 
 let
   hasFeature = feature: builtins.elem feature global_config.features;
@@ -87,7 +87,7 @@ in
     ffmpeg-full
     ffmpegthumbnailer
     dmenu
-    st
+    st.packages.${pkgs.system}.default
     j4-dmenu-desktop
     firefox
     xorg.xev

@@ -5,9 +5,10 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     dwm.url = "github:norakthes/dwm-flake";
+    st.url = "github:norakthes/st-flake";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, dwm }:
+  outputs = { self, nixpkgs, nixos-hardware, dwm, st }:
   let
     machine_configs = {
       laptop = {
@@ -54,7 +55,7 @@
         system = "x86_64-linux";
         specialArgs = {
           global_config = config;
-          inherit dwm;
+          inherit dwm st;
           machine_name = machine_name;
         };
         modules = [

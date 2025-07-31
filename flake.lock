@@ -66,11 +66,46 @@
         "type": "github"
       }
     },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1753694789,
+        "narHash": "sha256-cKgvtz6fKuK1Xr5LQW/zOUiAC0oSQoA9nOISB0pJZqM=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "dwm": "dwm",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "st": "st"
+      }
+    },
+    "st": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1753973998,
+        "narHash": "sha256-B3pIcYUaLNJGyln/ujrHxoTUTNc1AeJi9DMrpeVki28=",
+        "owner": "norakthes",
+        "repo": "st-flake",
+        "rev": "b81a7dc25e6ebb33ceb6bf47038cb0a44b993012",
+        "type": "github"
+      },
+      "original": {
+        "owner": "norakthes",
+        "repo": "st-flake",
+        "type": "github"
       }
     }
   },
