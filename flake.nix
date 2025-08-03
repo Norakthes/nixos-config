@@ -4,11 +4,22 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     dwm.url = "github:norakthes/dwm-flake";
     st.url = "github:norakthes/st-flake";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, dwm, st }:
+  outputs = { self, nixpkgs, nixos-hardware, home-manager, nixvim, dwm, st }:
   let
     machine_configs = {
       laptop = {
@@ -61,6 +72,25 @@
         modules = [
           ./configuration.nix
           ./machines/${machine_name}/hardware-configuration.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.${config.username} = {
+                imports = [
+                  nixvim.homeManagerModules.nixvim
+                  ./home.nix
+                ];
+                home.stateVersion = "25.05";
+              };
+              extraSpecialArgs = {
+                global_config = config;
+                inherit machine_name;
+              };
+            };
+          }
         ] ++ featureModules
         ++ nixpkgs.lib.optionals (builtins.pathExists ./machines/${machine_name}/default.nix) [
           ./machines/${machine_name}/default.nix
