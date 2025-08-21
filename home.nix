@@ -16,6 +16,10 @@
       Machine: ${global_config.hostname}
       User: ${global_config.username}
     '';
+
+    packages = with pkgs; [
+      libreoffice
+    ];
   };
 
   programs.home-manager.enable = true;
