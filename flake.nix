@@ -28,6 +28,7 @@
         features = [
           "gaming"
           "power_management"
+          "yubikey"
         ];
         keyboard = [
           "/dev/input/by-id/usb-ASUSTeK_Computer_Inc._N-KEY_Device-if02-event-kbd"
