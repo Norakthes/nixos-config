@@ -40,6 +40,10 @@ in
     enableSSHSupport = true;
     pinentryPackage = pkgs.pinentry-gtk2;
     #pinentryPackage = pkgs.pinentry-dmenu;
+    settings = {
+      default-cache-ttl = 30; # 30 seconds
+      max-cache-ttl = 60;     # 60 seconds
+    };
   };
 
   environment.interactiveShellInit = ''
@@ -59,5 +63,17 @@ in
 
   security.pam.services = {
     sudo.u2fAuth = true;
+  };
+
+  systemd.user.services.yubikey-touch-detector = {
+    description = "YubiKey touch detector";
+    wantedBy = [ "graphical-session.target" ];
+    serviceConfig = {
+      # The service needs the package, but NixOS handles it
+      ExecStart = "${pkgs.yubikey-touch-detector}/bin/yubikey-touch-detector --libnotify";
+      Restart = "on-failure";
+      RestartSec = "5s";
+    };
+    path = [ pkgs.gnupg ];
   };
 }
