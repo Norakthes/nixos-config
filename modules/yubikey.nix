@@ -27,7 +27,8 @@ in
     pcsclite
 
     gnupg
-    pinentry-dmenu
+    pinentry-gtk2
+    #pinentry-dmenu
     
     # Optional: for age encryption with YubiKey
     age-plugin-yubikey
@@ -37,7 +38,8 @@ in
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryPackage = pkgs.pinentry-dmenu;
+    pinentryPackage = pkgs.pinentry-gtk2;
+    #pinentryPackage = pkgs.pinentry-dmenu;
   };
 
   environment.interactiveShellInit = ''
