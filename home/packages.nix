@@ -4,6 +4,7 @@
     packages = with pkgs; [
       libreoffice
       shellcheck
+      zed-editor
     ];
   };
 }
