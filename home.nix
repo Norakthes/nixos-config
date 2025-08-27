@@ -1,6 +1,7 @@
 { config, pkgs, global_config, machine_name, ... }:
 {
   imports = [
+    ./home/packages.nix
     ./home/git.nix
     ./home/nixvim.nix
   ];
@@ -17,9 +18,6 @@
       User: ${global_config.username}
     '';
 
-    packages = with pkgs; [
-      libreoffice
-    ];
   };
 
   programs.home-manager.enable = true;
