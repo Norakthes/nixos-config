@@ -3,6 +3,7 @@
   imports = [
     ./home/packages.nix
     ./home/git.nix
+    ./home/ssh.nix
     ./home/nixvim.nix
     ./home/vscode.nix
   ];
