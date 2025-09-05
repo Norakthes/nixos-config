@@ -19,7 +19,7 @@
         hostname = "login1.gbar.dtu.dk";
         user = "s235765";
         identityFile = "~/.ssh/id_ed25519";
-        identiesOnly = true;
+        identitiesOnly = true;
       };
     };
   };
