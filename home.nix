@@ -2,6 +2,7 @@
 {
   imports = [
     ./home/packages.nix
+    ./home/python.nix
     ./home/git.nix
     ./home/ssh.nix
     ./home/nixvim.nix
