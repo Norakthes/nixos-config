@@ -22,6 +22,7 @@
       numpy
       pandas
       matplotlib
+      scipy
       statsmodels
     ]))
   ];
