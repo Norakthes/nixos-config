@@ -4,6 +4,7 @@
     ./home/packages.nix
     ./home/git.nix
     ./home/nixvim.nix
+    ./home/vscode.nix
   ];
 
   home = {
