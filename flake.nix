@@ -27,6 +27,8 @@
         username = "rasmus";
         features = [
           "gaming"
+          "development"
+          "riscv32-dev"
           "power_management"
           "yubikey"
         ];
