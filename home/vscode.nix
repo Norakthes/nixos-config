@@ -2,7 +2,7 @@
 {
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode.fhs;
+    package = pkgs.vscode;
 
     extensions = with pkgs.vscode-extensions; [
       ms-python.python
@@ -22,9 +22,9 @@
     ];
 
     userSettings = {
-      "python.defaultInterpreterPath" = "python3";
+      "python.defaultInterpreterPath" = "/etc/profiles/per-user/rasmus/bin/python3";
       "python.terminal.activateEnvironment" = true;
-      "python.pythonPath" = "python3";
+      "python.pythonPath" = "/etc/profiles/per-user/rasmus/bin/python3";
 
       "python.venvPath" = ".venv";
       "python.terminal.activateEnvInCurrentTerminal" = true;
