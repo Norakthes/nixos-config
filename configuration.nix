@@ -99,6 +99,7 @@ in
     flameshot
     transmission_4-gtk
     feh
+    xclip
 
     xfce.thunar-archive-plugin
     xfce.thunar-volman
