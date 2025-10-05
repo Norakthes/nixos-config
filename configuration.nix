@@ -198,8 +198,10 @@ in
     ];
   };
 
-  services.picom.enable = true;
-
+  services.picom = {
+    enable = true;
+    vSync = true;
+  };
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
