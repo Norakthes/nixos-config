@@ -26,6 +26,7 @@
         hostname = "laptop";
         username = "rasmus";
         features = [
+          "asusctl"
           "gaming"
           "development"
           "riscv32-dev"
