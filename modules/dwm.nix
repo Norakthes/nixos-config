@@ -9,4 +9,16 @@
   };
 
   services.displayManager.defaultSession = "none+dwm";
+
+  systemd.user.services.dwmstatus = {
+    description = "dwm status bar";
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.dwmstatus}/bin/dwmstatus";
+      Restart = "on-failure";
+      RestartSecs = "5s";
+    };
+  };
 }

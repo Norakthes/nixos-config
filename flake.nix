@@ -65,6 +65,10 @@
         featureModules = builtins.filter
           (path: builtins.pathExists path)
           (map (feature: ./modules + "/${feature}.nix") config.features);
+
+        customPackages = final: prev: {
+          dwmstatus = final.callPackage ./packages/dwmstatus {};
+        };
       in
       nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -74,6 +78,8 @@
           machine_name = machine_name;
         };
         modules = [
+          { nixpkgs.overlays = [ customPackages ]; }
+
           ./configuration.nix
           ./machines/${machine_name}/hardware-configuration.nix
 
