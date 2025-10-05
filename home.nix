@@ -7,6 +7,7 @@
     ./home/ssh.nix
     ./home/nixvim.nix
     ./home/vscode.nix
+    ./home/mpv.nix
   ];
 
   home = {
