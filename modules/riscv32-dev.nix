@@ -17,5 +17,6 @@ in
     # RISC-V simulators and emulators
     spike     # RISC-V ISA simulator
     qemu      # Includes RISC-V system and user mode emulation   
+    ripes     # Graphical processor simulator and assembly editor for RISC-V ISA
   ];
 }
