@@ -103,6 +103,8 @@ in
 
     xfce.thunar-archive-plugin
     xfce.thunar-volman
+
+    nix-index
   ];
 
   programs.thunar.enable = true;
