@@ -19,6 +19,11 @@
       ms-python.flake8
 
       ms-python.vscode-pylance
+
+      ms-vscode.makefile-tools
+      llvm-vs-code-extensions.vscode-clangd
+
+      vscodevim.vim
     ];
 
     userSettings = {
@@ -40,7 +45,7 @@
       "[python]" = {
         "editor.formatOnSave" = false;
         "editor.codeActionsOnSave" = {
-          "source.organizeImports" = false;
+          "source.organizeImports" = "never";
         };
         "editor.defaultFormatter" = "ms-python.black-formatter";
       };
@@ -48,6 +53,11 @@
       "terminal.integrated.env.linux" = {
         "UV_CACHE_DIR" = "\${userHome}/.cache/uv";
       };
+
+      "C_Cpp.autocomplete" = "disabled";
+      "C_Cpp.intelliSenseEngine" = "disabled";
+      "clangd.enable" = true;
+      "makefile.configureOnOpen" = true;
     };
   };
 }
