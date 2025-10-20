@@ -20,6 +20,8 @@
 
       ms-python.vscode-pylance
 
+      ms-vscode.cpptools
+      ms-vscode.cpptools-extension-pack
       ms-vscode.makefile-tools
       llvm-vs-code-extensions.vscode-clangd
 
