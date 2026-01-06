@@ -38,10 +38,9 @@
 
   # Hardware video acceleration for Firefox
   hardware.graphics.extraPackages = with pkgs; [
-    mesa.drivers
+    mesa
     libva
     nvidia-vaapi-driver
-    #vaapiVdpau
     libva-vdpau-driver
   ];
 

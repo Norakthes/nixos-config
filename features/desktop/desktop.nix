@@ -2,9 +2,6 @@
 { config, pkgs, st, ... }:
 
 {
-  # Graphics
-  hardware.graphics.enable = true;
-
   # X11 server
   services.xserver.enable = true;
 
@@ -55,13 +52,7 @@
     mesa
   ];
 
-  # Graphics
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      mesa
-    ];
-  };
+
 
   # Programs
   programs.thunar.enable = true;
