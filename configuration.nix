@@ -38,11 +38,14 @@ in
     ./modules/wallpaper.nix
   ] ++ 
   # Load feature modules based on machine configuration
-  (lib.optionals (hasFeature "desktop") [ ./features/desktop/desktop.nix ]) ++
+  (lib.optionals (hasFeature "desktop") [ { _file = ./features/desktop/desktop.nix; imports = [./features/desktop/desktop.nix]; _module.args.st = st; } ]) ++
   (lib.optionals (hasFeature "dwm") [ ./features/desktop/dwm.nix ]) ++
   (lib.optionals (hasFeature "development") [ ./features/development/development.nix ]) ++
   (lib.optionals (hasFeature "gaming") [ ./features/gaming/gaming.nix ]) ++
-  (lib.optionals (hasFeature "asusctl" || hasFeature "power_management" || hasFeature "yubikey" || hasFeature "riscv32-dev") [ ./features/hardware/hardware.nix ]) ++
+  (lib.optionals (hasFeature "asusctl") [ ./modules/asusctl.nix ]) ++
+  (lib.optionals (hasFeature "power_management") [ ./modules/power_management.nix ]) ++
+  (lib.optionals (hasFeature "yubikey") [ ./modules/yubikey.nix ]) ++
+  (lib.optionals (hasFeature "riscv32-dev") [ ./modules/riscv32-dev.nix ]) ++
   # Machine-specific configuration
   (lib.optionals (builtins.pathExists ./machines/${machine_name}/default.nix) [
     ./machines/${machine_name}/default.nix
@@ -76,4 +79,9 @@ in
 
   # Neovim
   programs.neovim.enable = true;
+
+  # ST terminal (from flake)
+  environment.systemPackages = with pkgs; [
+    st.packages.${pkgs.system}.default
+  ];
 }

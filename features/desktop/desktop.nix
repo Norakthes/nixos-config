@@ -1,5 +1,5 @@
 # Desktop environment and GUI applications
-{ config, pkgs, ... }:
+{ config, pkgs, st, ... }:
 
 {
   # Graphics
@@ -9,12 +9,14 @@
   services.xserver.enable = true;
 
   # Display manager with theme
-  services.displayManager.lightdm.enable = true;
-  services.displayManager.lightdm.greeters.gtk = {
+  services.xserver.displayManager.lightdm = {
     enable = true;
-    theme = {
-      package = pkgs.arc-theme;
-      name = "Arc-Dark";
+    greeters.gtk = {
+      enable = true;
+      theme = {
+        package = pkgs.arc-theme;
+        name = "Arc-Dark";
+      };
     };
   };
 
