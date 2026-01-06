@@ -1,5 +1,5 @@
 # Clean, modular configuration.nix
-{ config, pkgs, global_config, machine_name, st, ... }:
+{ config, pkgs, lib, global_config, machine_name, st, ... }:
 
 let
   hasFeature = feature: builtins.elem feature global_config.features;
