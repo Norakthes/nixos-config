@@ -26,12 +26,14 @@
         hostname = "laptop";
         username = "rasmus";
         features = [
-          "asusctl"
-          "gaming"
+          "desktop"
+          "dwm"
           "development"
-          "riscv32-dev"
+          "gaming"
+          "asusctl"
           "power_management"
           "yubikey"
+          "riscv32-dev"
         ];
         keyboard = [
           "/dev/input/by-id/usb-ASUSTeK_Computer_Inc._N-KEY_Device-if02-event-kbd"
@@ -48,6 +50,8 @@
         hostname = "desktop";
         username = "rasmus";
         features = [
+          "desktop"
+          "dwm"
           "gaming"
         ];
         keyboard = [
@@ -68,6 +72,7 @@
 
         customPackages = final: prev: {
           dwmstatus = final.callPackage ./packages/dwmstatus {};
+          maple = final.callPackage ./packages/maple {};
         };
       in
       nixpkgs.lib.nixosSystem {
@@ -90,7 +95,7 @@
               useUserPackages = true;
               users.${config.username} = {
                 imports = [
-                  nixvim.homeManagerModules.nixvim
+                  nixvim.homeModules.nixvim
                   ./home.nix
                 ];
                 home.stateVersion = "25.05";
@@ -111,5 +116,10 @@
       
   in {
     nixosConfigurations = builtins.mapAttrs mkSystem machine_configs;
+
+    packages.x86_64-linux = {
+      maple = nixpkgs.legacyPackages.x86_64-linux.callPackage ./packages/maple {};
+      dwmstatus = nixpkgs.legacyPackages.x86_64-linux.callPackage ./packages/dwmstatus {};
+    };
   };
 }
