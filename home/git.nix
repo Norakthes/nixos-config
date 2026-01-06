@@ -2,10 +2,13 @@
 {
   programs.git = {
     enable = true;
-    userName = "Rasmus Bødker";
-    userEmail = "rasmus.b.bodker@gmail.com";
 
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Rasmus Bødker";
+        email = "rasmus.b.bodker@gmail.com";
+      };
+
       init.defaultBranch = "main";
       pull.rebase = true;
       core.editor = "nvim";

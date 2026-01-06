@@ -5,6 +5,8 @@
       libreoffice
       shellcheck
       zed-editor
+      gnome-calculator
+      maple
     ];
   };
 }

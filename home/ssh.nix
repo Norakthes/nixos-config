@@ -2,10 +2,13 @@
 {
   programs.ssh = {
     enable = true;
-    
-    compression = true;
-    serverAliveInterval = 60;
-    serverAliveCountMax = 10;
+
+    matchBlocks."*" = {
+
+      compression = true;
+      serverAliveInterval = 60;
+      serverAliveCountMax = 10;
+    };
 
     matchBlocks = {
       "github.com" = {
