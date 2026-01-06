@@ -32,8 +32,7 @@
     xfce.thunar
     xfce.thunar-archive-plugin
     xfce.thunar-volman
-    services.gvfs.enable = true;
-    services.tumbler.enable = true;
+    arc-theme
     
     # Utilities
     brightnessctl
@@ -56,6 +55,8 @@
   # Programs
   programs.thunar.enable = true;
   programs.xfconf.enable = true;
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
 
   # XDG portals
   xdg.portal = {
