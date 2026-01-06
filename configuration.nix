@@ -30,7 +30,7 @@ in
     ./core/users.nix
     ./core/security.nix
 
-    # Essential feature modules (always applied for desktop)
+    # Essential system modules
     ./modules/gc.nix
     ./modules/kanata.nix
     ./modules/scripts.nix
