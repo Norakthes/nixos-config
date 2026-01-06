@@ -24,6 +24,9 @@
   environment.systemPackages = with pkgs; [
     btrfs-progs
     compsize
+    libva-utils
+    vdpauinfo
+    radeontop
   ];
 
   programs.zsh.shellAliases = {
@@ -33,6 +36,19 @@
     btrfs-defrag = "sudo btrfs filesystem defragment -r -v -czstd /";
   };
 
+  # Hardware video acceleration for Firefox
+  hardware.graphics.extraPackages = with pkgs; [
+    mesa.drivers
+    libva
+    nvidia-vaapi-driver
+    #vaapiVdpau
+    libva-vdpau-driver
+  ];
+
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "radeonsi";  # For AMD iGPU (change to "nvidia" if using dGPU)
+    MOZ_DISABLE_RDD_SANDBOX = "1";
+  };
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -40,4 +56,6 @@
     powerManagement.finegrained = true;
     nvidiaSettings = true;
   };
+
+  programs.localsend.enable = true;
 }
