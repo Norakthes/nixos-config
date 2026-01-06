@@ -9,14 +9,12 @@
   services.xserver.enable = true;
 
   # Display manager with theme
-  services.displayManager.lightdm = {
+  services.displayManager.lightdm.enable = true;
+  services.displayManager.lightdm.greeters.gtk = {
     enable = true;
-    greeters.gtk = {
-      enable = true;
-      theme = {
-        package = pkgs.arc-theme;
-        name = "Arc-Dark";
-      };
+    theme = {
+      package = pkgs.arc-theme;
+      name = "Arc-Dark";
     };
   };
 
