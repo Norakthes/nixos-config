@@ -8,8 +8,17 @@
   # X11 server
   services.xserver.enable = true;
 
-  # Display manager
-  services.displayManager.lightdm.enable = true;
+  # Display manager with theme
+  services.displayManager.lightdm = {
+    enable = true;
+    greeters.gtk = {
+      enable = true;
+      theme = {
+        package = pkgs.arc-theme;
+        name = "Arc-Dark";
+      };
+    };
+  };
 
   # Desktop environment packages
   environment.systemPackages = with pkgs; [
