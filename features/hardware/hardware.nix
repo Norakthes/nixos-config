@@ -8,6 +8,18 @@ in
   # ASUS laptop controls
   services.asusd = lib.mkIf (hasFeature "asusctl") {
     enable = true;
+    enableUserService = true;
+    asusdConfig.text = ''
+    '';
+  };
+  
+  # ASUS GPU switching
+  services.supergfxd = lib.mkIf (hasFeature "asusctl") {
+    enable = true;
+  };
+  
+  systemd.services.supergfxd = lib.mkIf (hasFeature "asusctl") {
+    path = [ pkgs.pciutils ];
   };
 
   # Power management
