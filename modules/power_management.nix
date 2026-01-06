@@ -18,8 +18,12 @@
   ];
 
   services.logind = {
-    lidSwitch = "suspend";
-    powerKey = "suspend";
+    settings = {
+      Login = {
+        HandleLidSwitch = "suspend";
+        HandlePowerKey = "suspend";
+      };
+    };
   };
 
 }

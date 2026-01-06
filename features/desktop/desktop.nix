@@ -50,7 +50,18 @@
     # Media
     ffmpeg-full
     ffmpegthumbnailer
+    
+    # Hardware acceleration
+    mesa
   ];
+
+  # Graphics
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      mesa
+    ];
+  };
 
   # Programs
   programs.thunar.enable = true;
@@ -64,6 +75,11 @@
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
     ];
+    config = {
+      common = {
+        default = "*";
+      };
+    };
   };
 
   # Compositor
