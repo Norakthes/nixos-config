@@ -34,6 +34,7 @@
           "power_management"
           "yubikey"
           "riscv32-dev"
+          "avr"
         ];
         keyboard = [
           "/dev/input/by-id/usb-ASUSTeK_Computer_Inc._N-KEY_Device-if02-event-kbd"
