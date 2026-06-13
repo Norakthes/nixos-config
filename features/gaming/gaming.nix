@@ -2,40 +2,37 @@
 { config, pkgs, lib, global_config, ... }:
 
 let
-  # GPU driver detection
-  gpuDrivers = 
-    let
-      hasNvidia = (global_config.gpu ? nvidia_bus_id) || (global_config.gpu ? type && global_config.gpu.type == "nvidia");
-      hasAmd = (global_config.gpu ? amd_bus_id) || (global_config.gpu ? type && global_config.gpu.type == "amd");
-      hasIntel = (global_config.gpu ? intel_bus_id);
-    in
-    (lib.optionals hasNvidia [ "nvidia" ]) ++
-    (lib.optionals hasAmd [ "amd" ]) ++
-    (lib.optionals hasIntel [ "modesetting" ]);
+  gpu = global_config.gpu;
+
+  hasNvidia = (gpu ? nvidia_bus_id) || ((gpu ? type) && gpu.type == "nvidia");
+  hasAmd    = (gpu ? amd_bus_id)    || ((gpu ? type) && gpu.type == "amd");
+  hasIntel  = (gpu ? intel_bus_id);
+
+  gpuDrivers =
+    lib.optionals hasNvidia [ "nvidia"      ] ++
+    lib.optionals hasAmd    [ "amdgpu"      ] ++
+    lib.optionals hasIntel  [ "modesetting" ];
 
   hasFeature = feature: builtins.elem feature global_config.features;
 
 in
 {
-  # GPU drivers
   services.xserver.videoDrivers = gpuDrivers;
 
-  # NVIDIA configuration
   hardware.nvidia = lib.mkIf (builtins.elem "nvidia" gpuDrivers) {
     modesetting.enable = true;
-    
+
     prime = lib.mkIf (hasFeature "nvidia_hybrid") {
       offload = {
         enable = true;
         enableOffloadCmd = true;
       };
-      intelBusId = lib.mkIf (global_config.gpu ? intel_bus_id) global_config.gpu.intel_bus_id;
-      amdgpuBusId = lib.mkIf (global_config.gpu ? amd_bus_id) global_config.gpu.amd_bus_id;
-      nvidiaBusId = global_config.gpu.nvidia_bus_id;
+      nvidiaBusId  = gpu.nvidia_bus_id;
+      intelBusId   = if (gpu ? intel_bus_id) then gpu.intel_bus_id else null;
+      amdgpuBusId  = if (gpu ? amd_bus_id)   then gpu.amd_bus_id   else null;
     };
   };
 
-  # Gaming programs
   programs = {
     steam = {
       enable = true;
@@ -44,7 +41,6 @@ in
     gamemode.enable = true;
   };
 
-  # Gaming packages
   environment.systemPackages = with pkgs; [
     mangohud
     protonup-qt
