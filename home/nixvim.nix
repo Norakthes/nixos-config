@@ -49,6 +49,8 @@
       
       # Backspace behavior
       backspace = "indent,eol,start";
+
+      clipboard = "unnamedplus";
     };
 
     # Key mappings
@@ -145,6 +147,52 @@
         key = "<leader>X";
         action = "<cmd>BufferLineCloseOthers<CR>";
         options.desc = "Close other buffers";
+      }
+
+      # Diagnostic keybindings
+      {
+        mode = "n";
+        key = "<leader>e";
+        action = "<cmd>lua vim.diagnostic.open_float()<CR>";
+        options.desc = "Show line diagnostics";
+      }
+      {
+        mode = "n";
+        key = "<leader>q";
+        action = "<cmd>lua vim.diagnostic.setloclist()<CR>";
+        options.desc = "Open diagnostic list";
+      }
+      {
+        mode = "n";
+        key = "[d";
+        action = "<cmd>lua vim.diagnostic.goto_prev()<CR>";
+        options.desc = "Previous diagnostic";
+      }
+      {
+        mode = "n";
+        key = "]d";
+        action = "<cmd>lua vim.diagnostic.goto_next()<CR>";
+        options.desc = "Next diagnostic";
+      }
+      {
+        mode = "n";
+        key = "<leader>fd";
+        action = "<cmd>Telescope diagnostics<CR>";
+        options.desc = "Find diagnostics";
+      }
+
+      # Comment toggling
+      {
+        mode = "n";
+        key = "<leader>/";
+        action = "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>";
+        options.desc = "Toggle comment line";
+      }
+      {
+        mode = "v";
+        key = "<leader>/";
+        action = "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>";
+        options.desc = "Toggle comment selection";
       }
     ];
 
@@ -257,7 +305,10 @@
               inlay_hints_hide_redundant_param_names_last_token = false;
             };
           };
-          clangd.enable = false;   # C/C++
+          clangd.enable = true;   # C/C++
+          wgsl_analyzer.enable = true; # WGSL
+          vtsls.enable = true; # Javascript/Typescript
+          html.enable = true; # HTML
         };
         
         # Enable inlay hints globally
@@ -372,6 +423,16 @@
     extraConfigLua = ''
       -- Custom highlight for column marker
       vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#2d3748" })
+
+        -- Configure diagnostics
+      vim.diagnostic.config({
+        virtual_text = true,  -- Show errors inline
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+        severity_sort = true,
+      })
+
 
       -- Enable inlay hints automatically
       vim.api.nvim_create_autocmd("LspAttach", {

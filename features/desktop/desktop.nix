@@ -24,6 +24,7 @@
     dmenu
     j4-dmenu-desktop
     xorg.xev
+    xorg.xkill
     
     # File management
     xfce.thunar

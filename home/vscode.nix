@@ -31,6 +31,8 @@
         vadimcn.vscode-lldb
 
         james-yu.latex-workshop
+
+        wgsl-analyzer.wgsl-analyzer
       ];
 
       userSettings = {

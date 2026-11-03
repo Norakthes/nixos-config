@@ -27,7 +27,7 @@ in
     pcsclite
 
     gnupg
-    pinentry-gtk2
+    pinentry-gnome3
     #pinentry-dmenu
     
     # Optional: for age encryption with YubiKey
@@ -38,7 +38,7 @@ in
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryPackage = pkgs.pinentry-gtk2;
+    pinentryPackage = pkgs.pinentry-gnome3;
     #pinentryPackage = pkgs.pinentry-dmenu;
     settings = {
       default-cache-ttl = 30; # 30 seconds

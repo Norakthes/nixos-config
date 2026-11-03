@@ -45,7 +45,7 @@ in
     mangohud
     protonup-qt
     lutris
-    bottles
+    #bottles
     heroic
     gamescope
   ];

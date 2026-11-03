@@ -15,6 +15,7 @@
     clang
     clang-tools
     llvm
+    llvmPackages.openmp
     
     # Binary analysis
     binutils

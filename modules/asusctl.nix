@@ -2,7 +2,7 @@
 {
   services.asusd = {
     enable = true;
-    enableUserService = true;
+    # enableUserService = true;
     asusdConfig.text = ''
 
     '';

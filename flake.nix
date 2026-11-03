@@ -35,10 +35,12 @@
           "yubikey"
           "riscv32-dev"
           "avr"
+          "vm"
         ];
         keyboard = [
           "/dev/input/by-id/usb-ASUSTeK_Computer_Inc._N-KEY_Device-if02-event-kbd"
           "/dev/input/by-id/usb-ASUSTeK_Computer_Inc._N-KEY_Device-event-if00"
+          "/dev/input/by-id/usb-_Akko_2.4G_Wireless_Keyboard-event-kbd"
         ];
         gpu = {
           amd_bus_id = "PCI:07:00:0";
