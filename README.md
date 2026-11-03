@@ -15,3 +15,6 @@ sudo nixos-rebuild switch --flake .    # picks the host by hostname
 
 New machine: `hosts/<hostname>/` with `default.nix` and
 `hardware-configuration.nix`, then add the name to `flake.nix`.
+
+What changed in the split, and how to roll back: MIGRATION.md in the
+home-manager repo.
