@@ -1,9 +1,8 @@
-{config, pkgs, lib}:
+{ ... }:
 {
   virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection = true;
-
-  users.users.rasmus.extraGroups = [ "libvirtd" "wheel" ];
-
+  virtualisation.spiceUSBRedirection.enable = true;
   programs.virt-manager.enable = true;
+
+  users.users.rasmus.extraGroups = [ "libvirtd" ];
 }

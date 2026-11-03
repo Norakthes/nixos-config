@@ -1,128 +1,21 @@
 {
-  description = "My NixOS configuration";
+  description = "Rasmus' NixOS system config (user config lives in the home-manager repo)";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     dwm.url = "github:norakthes/dwm-flake";
-    st.url = "github:norakthes/st-flake";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, home-manager, nixvim, dwm, st }:
+  outputs = { nixpkgs, ... }@inputs:
   let
-    machine_configs = {
-      laptop = {
-        hostname = "laptop";
-        username = "rasmus";
-        features = [
-          "desktop"
-          "dwm"
-          "development"
-          "gaming"
-          "asusctl"
-          "power_management"
-          "yubikey"
-          "riscv32-dev"
-          "avr"
-          "vm"
-        ];
-        keyboard = [
-          "/dev/input/by-id/usb-ASUSTeK_Computer_Inc._N-KEY_Device-if02-event-kbd"
-          "/dev/input/by-id/usb-ASUSTeK_Computer_Inc._N-KEY_Device-event-if00"
-          "/dev/input/by-id/usb-_Akko_2.4G_Wireless_Keyboard-event-kbd"
-        ];
-        gpu = {
-          amd_bus_id = "PCI:07:00:0";
-          nvidia_bus_id = "PCI:01:00:0";
-        };
-        hardware_module = nixos-hardware.nixosModules.asus-zephyrus-ga503;
-      };
-
-      desktop = {
-        hostname = "desktop";
-        username = "rasmus";
-        features = [
-          "desktop"
-          "dwm"
-          "gaming"
-        ];
-        keyboard = [
-          "/dev/input/by-id/usb-ROYUAN_Akko_Multi-modes_Keyboard-B-event-kbd"
-	];
-        gpu = {
-          type = "amd";
-        };
-        hardware_module = null;
-      };
+    mkHost = host: nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
+      modules = [ ./hosts/${host} ];
     };
-
-    mkSystem = machine_name: config:
-      let
-        featureModules = builtins.filter
-          (path: builtins.pathExists path)
-          (map (feature: ./modules + "/${feature}.nix") config.features);
-
-        customPackages = final: prev: {
-          dwmstatus = final.callPackage ./packages/dwmstatus {};
-          maple = final.callPackage ./packages/maple {};
-        };
-      in
-      nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          global_config = config;
-          inherit dwm st;
-          machine_name = machine_name;
-        };
-        modules = [
-          { nixpkgs.overlays = [ customPackages ]; }
-
-          ./configuration.nix
-          ./machines/${machine_name}/hardware-configuration.nix
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.${config.username} = {
-                imports = [
-                  nixvim.homeModules.nixvim
-                  ./home.nix
-                ];
-                home.stateVersion = "25.05";
-              };
-              extraSpecialArgs = {
-                global_config = config;
-                inherit machine_name;
-              };
-            };
-          }
-        ] ++ featureModules
-        ++ nixpkgs.lib.optionals (builtins.pathExists ./machines/${machine_name}/default.nix) [
-          ./machines/${machine_name}/default.nix
-        ] ++ nixpkgs.lib.optionals (config.hardware_module != null) [
-          config.hardware_module
-        ];
-      };
-      
-  in {
-    nixosConfigurations = builtins.mapAttrs mkSystem machine_configs;
-
-    packages.x86_64-linux = {
-      maple = nixpkgs.legacyPackages.x86_64-linux.callPackage ./packages/maple {};
-      dwmstatus = nixpkgs.legacyPackages.x86_64-linux.callPackage ./packages/dwmstatus {};
-    };
+  in
+  {
+    # sudo nixos-rebuild switch --flake .   (picks $(hostname))
+    nixosConfigurations = nixpkgs.lib.genAttrs [ "laptop" "desktop" ] mkHost;
   };
 }
