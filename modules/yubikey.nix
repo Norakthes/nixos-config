@@ -23,5 +23,5 @@ in
       cue = true;
     };
   };
-  security.pam.services.sudo.u2fAuth = true;
+  security.pam.services.sudo.u2f.enable = true;
 }
